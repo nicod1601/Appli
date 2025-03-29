@@ -38,7 +38,7 @@ public class PanelOptionParametre extends JPanel implements ActionListener
         this.btnQuitter = new JButton("Quitter");
 
         /* Panel Compte */
-        this.panelCompte.setLayout(new GridLayout(3, 1, 5, 5)); // Ajustement des espacements
+        this.panelCompte.setLayout(new GridLayout(3, 1, 5, 5));
         this.lblProfil = new JLabel("Profil");
         this.txtNom = new JTextField(20);
         this.txtPrenom = new JTextField(20);

@@ -29,15 +29,14 @@ public class PanelAccueil extends JPanel implements ActionListener, MouseListene
             Image newimg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
             icon = new ImageIcon(newimg);
 
-            this.tabButton[cpt] = new JButton(this.tabNom[cpt], icon); // Ajoute le texte sous l'image
+            this.tabButton[cpt] = new JButton(this.tabNom[cpt], icon);
             this.tabButton[cpt].setContentAreaFilled(false);
             this.tabButton[cpt].setBorderPainted(false);
             this.tabButton[cpt].setOpaque(false);
-            this.tabButton[cpt].setVerticalTextPosition(SwingConstants.BOTTOM); // Texte en dessous
-            this.tabButton[cpt].setHorizontalTextPosition(SwingConstants.CENTER); // Centré horizontalement
-            this.tabButton[cpt].setForeground(Color.WHITE); // Couleur du texte
-            this.tabButton[cpt].setFont(new Font("Arial", Font.BOLD, 12)); // Police du texte
-
+            this.tabButton[cpt].setVerticalTextPosition(SwingConstants.BOTTOM);
+            this.tabButton[cpt].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.tabButton[cpt].setForeground(Color.WHITE);
+            this.tabButton[cpt].setFont(new Font("Arial", Font.BOLD, 12));
             this.tabButton[cpt].setBorder(new LineBorder(Color.YELLOW, 2));
         }
 
