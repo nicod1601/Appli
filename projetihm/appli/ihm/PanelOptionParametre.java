@@ -18,13 +18,18 @@ public class PanelOptionParametre extends JPanel implements ActionListener
     private JTextField txtNom;
     private JTextField txtPrenom;
 
-    public PanelOptionParametre() {
+    private FrameAppli frame;
+
+    public PanelOptionParametre(FrameAppli frame)
+    {
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(30, 30, 30));
 
         /*--------------------------*/
         /* Création des composants  */
         /*--------------------------*/
+        this.frame = frame;
+
         this.tabbedPane = new JTabbedPane();
         this.panelCompte = new JPanel();
         this.panelChangerFond = new JPanel();
@@ -54,13 +59,13 @@ public class PanelOptionParametre extends JPanel implements ActionListener
         /* Action des composants */
         this.btnQuitter.addActionListener(this);
 
-        this.setVisible(false);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.btnQuitter) {
-            this.setVisible(false);
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == this.btnQuitter) 
+        {
+            this.frame.parametre(false);
         }
     }
 }

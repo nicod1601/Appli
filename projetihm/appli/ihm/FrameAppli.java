@@ -18,6 +18,7 @@ public class FrameAppli extends JFrame
         this.setSize(500, 500);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         this.frameID = frameID;
         /*--------------------------*/
@@ -25,29 +26,32 @@ public class FrameAppli extends JFrame
         /*--------------------------*/
         this.panelAccueil = new PanelAccueil();
         this.panelParametre = new PanelParametre(this.frameID, this);
-        this.panelOptionParametre = new PanelOptionParametre();
+        this.panelOptionParametre = new PanelOptionParametre(this);
 
 
         /*---------------------------*/
         /*   Position des composants */
         /*---------------------------*/
-        this.add(this.panelAccueil);
-        this.add(this.panelParametre, BorderLayout.NORTH);
+        this.add(this.panelAccueil        , BorderLayout.CENTER);
+        this.add(this.panelParametre      , BorderLayout.NORTH );
+
 
         this.setVisible(false);
     }
 
-    public void parametre()
+    public void parametre(boolean t)
     {
-        if(this.panelOptionParametre.isVisible() == false)
-        {
-            this.panelOptionParametre.setVisible(true);
-            this.panelAccueil.setVisible(false);
+        // Si le panel d'options est visible, on le remplace par le panel d'accueil
+        if (t) {
+            this.remove(this.panelAccueil);
+            this.add(this.panelOptionParametre, BorderLayout.CENTER);
+        } else {
+            this.remove(this.panelOptionParametre);
+            this.add(this.panelAccueil, BorderLayout.CENTER);
         }
-        else
-        {
-            this.panelOptionParametre.setVisible(false);
-            this.panelAccueil.setVisible(true);
-        }
+
+        // Mettre à jour l'interface pour appliquer le changement
+        this.revalidate();
+        this.repaint();
     }
 }

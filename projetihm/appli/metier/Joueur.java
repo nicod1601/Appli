@@ -91,23 +91,4 @@ public class Joueur
         }
         return false;
     }
-
-    public static void main(String[] args) 
-    {
-        Joueur[] joueurs = {
-            Joueur.creerJoueur("Dupont", "Pierre", 1),
-            Joueur.creerJoueur("Dupont", "Pierre", 2),
-            Joueur.creerJoueur("Dupont", "Pierre", 3),
-            Joueur.creerJoueur("Dupont", "Pierre", 4),
-            Joueur.creerJoueur("Dupont", "Pierre", 4) // Devrait être refusé
-        };
-    
-        for (int i = 0; i < joueurs.length; i++) {
-            if (joueurs[i] != null) {
-                System.out.println("Joueur " + (i + 1) + " : " + joueurs[i].getNom() + " " + joueurs[i].getPrenom() + " " + joueurs[i].getID());
-            } else {
-                System.out.println("Joueur " + (i + 1) + " n'a pas été créé (doublon détecté).");
-            }
-        }
-    }
 }

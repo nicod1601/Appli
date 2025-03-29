@@ -9,13 +9,12 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
     
     private JTextField txtNom;
     private JTextField txtPrenom;
+    private JLabel     lblMessage;
 
     JPanel panelBouton;
     private JButton btnConnexion;
     private JButton btnCreer;
 
-    JPanel panelNom;
-    JPanel panelPrenom;
     
     private FrameConnexion frame;
 
@@ -31,11 +30,6 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
         JLabel lblNom    = new JLabel("nom :"    , JLabel.CENTER);
         JLabel lblPrenom = new JLabel("prénom :" , JLabel.CENTER);
 
-        JPanel panelNom    = new JPanel();
-        panelNom.setBackground(new Color(30, 30, 30));
-        JPanel panelPrenom = new JPanel();
-        panelPrenom.setBackground(new Color(30, 30, 30));
-
         this.txtNom = new JTextField(10);
         this.txtPrenom = new JTextField(10);
 
@@ -43,6 +37,8 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
         panelBouton.setBackground(new Color(30, 30, 30));
         this.btnConnexion = new JButton("Connexion");
         this.btnCreer = new JButton("Créer un compte");
+
+        this.lblMessage = new JLabel("");
 
         this.styleButton(this.btnConnexion);
         this.styleButton(this.btnCreer);
@@ -58,16 +54,11 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
         panelBouton.add(this.btnCreer);
         panelBouton.add(this.btnConnexion);
 
-
-        panelNom.add(this.txtNom);
-
-        panelPrenom.add(this.txtPrenom);
-
         this.add(lblNom);
-        this.add(panelNom);
+        this.add(this.txtNom);
         this.add(lblPrenom);
-        this.add(panelPrenom);
-        this.add(new JLabel());
+        this.add(this.txtPrenom);
+        this.add(this.lblMessage);
         this.add(panelBouton);
 
 
@@ -97,12 +88,17 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
                 if(this.frame.connecter(this.txtNom.getText(), this.txtPrenom.getText()))
                 {
                     System.out.println("Connexion effectuée");
+                    this.lblMessage.setText("");
+                    this.txtNom.setText("");
+                    this.txtPrenom.setText("");
                     this.frame.frameAppli();
                     this.frame.setVisible(false);
                 }
                 else
                 {
                     System.out.println("Connexion impossible");
+                    this.lblMessage.setText("Connexion impossible");
+                    this.lblMessage.setForeground(Color.RED);
                 }
             }
         }

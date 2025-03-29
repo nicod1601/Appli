@@ -13,8 +13,9 @@ public class FrameID extends JFrame
     public FrameID(Controleur ctrl)
     {
         this.setTitle("Page Identification");
-        this.setSize(450, 200);
+        this.setSize(500, 150);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         /*--------------------------*/
         /* Création des composants  */
         /*--------------------------*/

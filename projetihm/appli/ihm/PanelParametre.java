@@ -50,7 +50,7 @@ public class PanelParametre extends JPanel implements ActionListener, MouseListe
         if(e.getSource() == this.btnParametre)
         {
             System.out.println("Paramétrage appuyé");
-            this.frameAppli.parametre();
+            this.frameAppli.parametre(true);
         }
         else if(e.getSource() == this.btnQuitter)
         {
