@@ -11,7 +11,7 @@ public class FrameConnexion extends JFrame
     public FrameConnexion(FrameID frameID)
     {
         this.setTitle("Page Connexion");
-        this.setSize(600, 200);
+        this.setSize(450, 150);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
