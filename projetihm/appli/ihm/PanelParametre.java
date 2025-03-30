@@ -92,4 +92,10 @@ public class PanelParametre extends JPanel implements ActionListener, MouseListe
         button.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
         button.setFocusPainted(false);
     }
+
+    public void setFondBouton(Color c)
+    {
+       this.btnParametre.setBorder(BorderFactory.createLineBorder(c, 2));
+       this.btnQuitter.setBorder(BorderFactory.createLineBorder(c, 2));
+    }
 }

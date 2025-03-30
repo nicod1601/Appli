@@ -1,6 +1,6 @@
 package appli.ihm;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.*;
 
 public class FrameAppli extends JFrame
@@ -53,5 +53,15 @@ public class FrameAppli extends JFrame
         // Mettre à jour l'interface pour appliquer le changement
         this.revalidate();
         this.repaint();
+    }
+
+    public void setFond(Color c)
+    {
+        this.panelAccueil.setBackground(c);
+    }
+
+    public void setFondBouton(Color c)
+    {
+       this.panelParametre.setFondBouton(c);
     }
 }

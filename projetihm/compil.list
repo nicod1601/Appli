@@ -13,3 +13,4 @@
 
 ./appli/metier/Joueur.java
 ./appli/metier/Compte.java
+./appli/metier/Fond.java

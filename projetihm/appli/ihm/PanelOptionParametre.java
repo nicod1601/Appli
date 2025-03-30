@@ -3,20 +3,29 @@ package appli.ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import appli.metier.Fond;
 
-public class PanelOptionParametre extends JPanel implements ActionListener 
+public class PanelOptionParametre extends JPanel implements ActionListener, ItemListener
 {
     private JTabbedPane tabbedPane;
-    private JPanel panelCompte;
     private JPanel panelChangerFond;
     private JPanel panelSecurite;
+    private JPanel panelOptionFond;
 
     private JButton btnQuitter;
 
     /* Partie Compte */
+    private JPanel panelCompte;
     private JLabel lblProfil;
     private JTextField txtNom;
     private JTextField txtPrenom;
+
+    private JRadioButton[] tabRadio;
+    private ButtonGroup groupe;
+
+    /* Partie Fond */
+    private Fond fond;
+    private JButton[][] tabButtonFond;
 
     private FrameAppli frame;
 
@@ -38,7 +47,7 @@ public class PanelOptionParametre extends JPanel implements ActionListener
         this.btnQuitter = new JButton("Quitter");
 
         /* Panel Compte */
-        this.panelCompte.setLayout(new GridLayout(3, 1, 5, 5));
+        this.panelCompte.setLayout(new GridLayout(2, 3, 5, 5));
         this.lblProfil = new JLabel("Profil");
         this.txtNom = new JTextField(20);
         this.txtPrenom = new JTextField(20);
@@ -47,18 +56,106 @@ public class PanelOptionParametre extends JPanel implements ActionListener
         this.panelCompte.add(this.txtNom);
         this.panelCompte.add(this.txtPrenom);
 
+        /* Panel Fond */
+        this.fond = new Fond();
+        //this.panelChangerFond.setLayout(new GridLayout(this.fond.getLigne(), this.fond.getColonne(),5,5));
+        this.panelChangerFond.setLayout(new GridLayout( 10, 3,5,5));
+        this.tabButtonFond = new JButton[this.fond.getLigne()][this.fond.getColonne()];
+
+        for(int cpt=0; cpt<this.fond.getLigne(); cpt++)
+        {
+            for(int cpt2=0; cpt2<this.fond.getColonne(); cpt2++)
+            {
+                this.tabButtonFond[cpt][cpt2] = new JButton();
+                this.tabButtonFond[cpt][cpt2].setBackground(this.fond.getCouleur(cpt, cpt2));
+                this.panelChangerFond.add(this.tabButtonFond[cpt][cpt2]);
+            }
+        }
+
+        this.panelOptionFond = new JPanel();
+
+        this.tabRadio = new JRadioButton[2];
+        this.tabRadio[0] = new JRadioButton("Fond d'écrans"  );
+        this.tabRadio[1] = new JRadioButton("Bordure Boutons");
+        
+        this.groupe = new ButtonGroup();
+        this.groupe.add(this.tabRadio[0]);
+        this.groupe.add(this.tabRadio[1]);
+
+        this.panelOptionFond.add(this.tabRadio[0]);
+        this.panelOptionFond.add(this.tabRadio[1]);
+
+        this.tabbedPane.addChangeListener(e -> {
+            if (this.tabbedPane.getSelectedComponent() == this.panelChangerFond) {
+                this.panelOptionFond.setVisible(true);
+            } else {
+                this.panelOptionFond.setVisible(false);
+            }
+        });
+
+        
+
         /* Ajout des onglets */
         this.tabbedPane.addTab("Compte", this.panelCompte);
         this.tabbedPane.addTab("Changer le fond", this.panelChangerFond);
         this.tabbedPane.addTab("Sécurité", this.panelSecurite);
 
+
+        /*--------------------------*/
+        /* Position des composants  */
+        /*--------------------------*/
+
         /* Position des composants */
-        this.add(this.btnQuitter, BorderLayout.NORTH);
-        this.add(this.tabbedPane, BorderLayout.CENTER);
+        this.add(this.btnQuitter     , BorderLayout.NORTH );
+        this.add(this.tabbedPane     , BorderLayout.CENTER);
+        this.add(this.panelOptionFond, BorderLayout.SOUTH );
 
-        /* Action des composants */
+        /*--------------------------*/
+        /* Activation des composants*/
+        /*--------------------------*/
+
+        // ActionListener
         this.btnQuitter.addActionListener(this);
+        
+        for(int cpt=0; cpt<this.fond.getLigne(); cpt++)
+        {
+            for(int cpt2=0; cpt2<this.fond.getColonne(); cpt2++)
+            {
+                this.tabButtonFond[cpt][cpt2].addActionListener(this);
+            }
+        }
 
+        //ItemListener
+        for(int cpt=0; cpt<this.tabRadio.length; cpt++)
+        {
+            this.tabRadio[cpt].addItemListener(this);
+        }
+
+    }
+
+    public void itemStateChanged(ItemEvent e)
+    {
+        if(e.getSource() == this.tabRadio[0])
+        {
+            this.changerFond();
+            this.changerFondBouton();
+        }
+
+        if(e.getSource() == this.tabRadio[1])
+        {    
+            this.changerFondBouton();
+            this.changerFond();
+        }
+    }
+
+    public boolean changerFond()
+    {
+        return this.tabRadio[0].isSelected();
+    }
+
+    public boolean changerFondBouton()
+    {
+        return this.tabRadio[1].isSelected();
     }
 
     public void actionPerformed(ActionEvent e)
@@ -66,6 +163,27 @@ public class PanelOptionParametre extends JPanel implements ActionListener
         if (e.getSource() == this.btnQuitter) 
         {
             this.frame.parametre(false);
+        }
+
+        for(int cpt=0; cpt<this.fond.getLigne(); cpt++)
+        {
+            for(int cpt2=0; cpt2<this.fond.getColonne(); cpt2++)
+            {
+                if(e.getSource() == this.tabButtonFond[cpt][cpt2])
+                {
+                    if(this.changerFond())
+                    {
+                        System.out.println("fond");
+                        this.frame.setFond(this.tabButtonFond[cpt][cpt2].getBackground());
+                    }
+                    
+                    if(this.changerFondBouton())
+                    {
+                        System.out.println("bouton");
+                        this.frame.setFondBouton(this.tabButtonFond[cpt][cpt2].getBackground());
+                    }
+                }
+            }
         }
     }
 }
