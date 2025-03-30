@@ -64,4 +64,9 @@ public class FrameAppli extends JFrame
     {
        this.panelParametre.setFondBouton(c);
     }
+
+    public void setEcritureBouton(Color c)
+    {
+        this.panelParametre.setEcritureBouton(c);
+    }
 }

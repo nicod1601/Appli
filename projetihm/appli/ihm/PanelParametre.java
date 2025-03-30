@@ -98,4 +98,10 @@ public class PanelParametre extends JPanel implements ActionListener, MouseListe
        this.btnParametre.setBorder(BorderFactory.createLineBorder(c, 2));
        this.btnQuitter.setBorder(BorderFactory.createLineBorder(c, 2));
     }
+
+    public void setEcritureBouton(Color c)
+    {
+        this.btnParametre.setForeground(c);
+        this.btnQuitter.setForeground(c);
+    }
 }

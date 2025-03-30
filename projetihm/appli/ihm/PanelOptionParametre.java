@@ -58,8 +58,8 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
 
         /* Panel Fond */
         this.fond = new Fond();
-        //this.panelChangerFond.setLayout(new GridLayout(this.fond.getLigne(), this.fond.getColonne(),5,5));
-        this.panelChangerFond.setLayout(new GridLayout( 10, 3,5,5));
+        this.panelChangerFond.setLayout(new GridLayout( this.fond.getLigne(), this.fond.getColonne(),5,5));
+        System.out.println(this.fond.getLigne() + " " + this.fond.getColonne());
         this.tabButtonFond = new JButton[this.fond.getLigne()][this.fond.getColonne()];
 
         for(int cpt=0; cpt<this.fond.getLigne(); cpt++)
@@ -74,16 +74,19 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
 
         this.panelOptionFond = new JPanel();
 
-        this.tabRadio = new JRadioButton[2];
+        this.tabRadio = new JRadioButton[3];
         this.tabRadio[0] = new JRadioButton("Fond d'écrans"  );
         this.tabRadio[1] = new JRadioButton("Bordure Boutons");
+        this.tabRadio[2] = new JRadioButton("Ecriture Boutons");
         
         this.groupe = new ButtonGroup();
         this.groupe.add(this.tabRadio[0]);
         this.groupe.add(this.tabRadio[1]);
+        this.groupe.add(this.tabRadio[2]);
 
         this.panelOptionFond.add(this.tabRadio[0]);
         this.panelOptionFond.add(this.tabRadio[1]);
+        this.panelOptionFond.add(this.tabRadio[2]);
 
         this.tabbedPane.addChangeListener(e -> {
             if (this.tabbedPane.getSelectedComponent() == this.panelChangerFond) {
@@ -138,13 +141,16 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         if(e.getSource() == this.tabRadio[0])
         {
             this.changerFond();
-            this.changerFondBouton();
         }
 
         if(e.getSource() == this.tabRadio[1])
         {    
             this.changerFondBouton();
-            this.changerFond();
+        }
+
+        if(e.getSource() == this.tabRadio[2])
+        {    
+            this.changerEcritureBouton();
         }
     }
 
@@ -156,6 +162,11 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
     public boolean changerFondBouton()
     {
         return this.tabRadio[1].isSelected();
+    }
+
+    public boolean changerEcritureBouton()
+    {
+        return this.tabRadio[2].isSelected();
     }
 
     public void actionPerformed(ActionEvent e)
@@ -181,6 +192,12 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
                     {
                         System.out.println("bouton");
                         this.frame.setFondBouton(this.tabButtonFond[cpt][cpt2].getBackground());
+                    }
+
+                    if(this.changerEcritureBouton())
+                    {
+                        System.out.println("ecriture");
+                        this.frame.setEcritureBouton(this.tabButtonFond[cpt][cpt2].getBackground());
                     }
                 }
             }

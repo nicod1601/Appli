@@ -9,16 +9,15 @@ public class Fond
     public Fond()
     {
         this.tabCouleur = new Color[][] {
-                                          { new Color(255, 0, 0, 255)    , new Color(0, 255, 0, 255)    , new Color(0, 0, 255, 255)    , 
-                                            new Color(255, 255, 0, 255)  , new Color(255, 0, 255, 255)  , new Color(0, 255, 255, 255)  , 
-                                            new Color(128, 0, 0, 255)    , new Color(0, 128, 0, 255)    , new Color(0, 0, 128, 255)    , 
-                                            new Color(128, 128, 0, 255)  , new Color(128, 0, 128, 255)  , new Color(0, 128, 128, 255)  , 
-                                            new Color(192, 0, 0, 255)    , new Color(0, 192, 0, 255)    , new Color(0, 0, 192, 255)    , 
-                                            new Color(255, 128, 0, 255)  , new Color(255, 0, 128, 255)  , new Color(128, 255, 0, 255)  , 
-                                            new Color(0, 255, 128, 255)  , new Color(128, 128, 128, 255), new Color(192, 192, 192, 255), 
-                                            new Color(255, 255, 128, 255), new Color(255, 128, 255, 255), new Color(128, 255, 255, 255), 
-                                            new Color(0, 128, 192, 255)  , new Color(128, 0, 192, 255)  , new Color(192, 128, 0, 255)  , 
-                                            new Color(0, 192, 128, 255)  , new Color(128, 192, 128, 255), new Color(192, 192, 128, 255) }};
+            { new Color(255, 0, 0, 255)    , new Color(0, 255, 0, 255)  , new Color(0, 0, 255, 255)    , new Color(255, 255, 0, 255)  }, 
+            { new Color(255, 0, 255, 255)  , new Color(0, 255, 255, 255), new Color(128, 0, 0, 255)    , new Color(0, 128, 0, 255)    },
+            { new Color(0, 0, 128, 255)    , new Color(128, 128, 0, 255), new Color(128, 0, 128, 255)  , new Color(0, 128, 128, 255)  }, 
+            { new Color(192, 0, 0, 255)    , new Color(0, 192, 0, 255)  , new Color(0, 0, 192, 255)    , new Color(255, 128, 0, 255)  },
+            { new Color(255, 0, 128, 255)  , new Color(128, 255, 0, 255), new Color(0, 255, 128, 255)  , new Color(128, 128, 128, 255)},
+            { new Color(192, 192, 192, 255), new Color(0, 128, 192, 255), new Color(128, 0, 192, 255)  , new Color(192, 128, 0, 255)  },
+            { new Color(255, 255, 128, 255), new Color(0, 192, 128, 255), new Color(128, 192, 128, 255), new Color(255, 128, 255, 255)}, 
+            {new Color(128, 255, 255, 255) , new Color(192, 192, 128, 255), new Color(192, 128, 192, 255), new Color(255, 128, 128, 255)} 
+        };
     }
 
     public int getLigne()
