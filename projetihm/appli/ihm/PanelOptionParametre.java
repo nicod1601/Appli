@@ -3,6 +3,12 @@ package appli.ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import appli.Controleur;
 import appli.metier.Fond;
 
 public class PanelOptionParametre extends JPanel implements ActionListener, ItemListener
@@ -20,6 +26,10 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
     private JTextField txtNom;
     private JTextField txtPrenom;
 
+    private JPanel panelBoutonCompte;
+    private JButton btnImporter;
+
+
     private JRadioButton[] tabRadio;
     private ButtonGroup groupe;
 
@@ -28,8 +38,9 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
     private JButton[][] tabButtonFond;
 
     private FrameAppli frame;
+    private Controleur ctrl;
 
-    public PanelOptionParametre(FrameAppli frame)
+    public PanelOptionParametre(FrameAppli frame, Controleur ctrl)
     {
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(30, 30, 30));
@@ -38,6 +49,7 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         /* Création des composants  */
         /*--------------------------*/
         this.frame = frame;
+        this.ctrl = ctrl;
 
         this.tabbedPane = new JTabbedPane();
         this.panelCompte = new JPanel();
@@ -48,12 +60,17 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
 
         /* Panel Compte */
         this.panelCompte.setLayout(new GridLayout(2, 3, 5, 5));
-        this.lblProfil = new JLabel("Profil");
+        this.lblProfil = new JLabel(" ");
         this.txtNom = new JTextField(20);
         this.txtPrenom = new JTextField(20);
 
+        this.panelBoutonCompte = new JPanel();
+        this.btnImporter = new JButton("Importer");
+        this.panelBoutonCompte.add(this.btnImporter);
+
         this.panelCompte.add(this.lblProfil);
         this.panelCompte.add(this.txtNom);
+        this.panelCompte.add(this.panelBoutonCompte);
         this.panelCompte.add(this.txtPrenom);
 
         /* Panel Fond */
@@ -127,6 +144,10 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
                 this.tabButtonFond[cpt][cpt2].addActionListener(this);
             }
         }
+
+        this.btnImporter.addActionListener(this);
+        this.txtNom.addActionListener(this);
+        this.txtPrenom.addActionListener(this);
 
         //ItemListener
         for(int cpt=0; cpt<this.tabRadio.length; cpt++)
@@ -202,5 +223,34 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
                 }
             }
         }
+
+        if(e.getSource() == this.btnImporter)
+        {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int returnValue = fileChooser.showOpenDialog(this);
+            
+            if (returnValue == JFileChooser.APPROVE_OPTION) 
+            {
+                File file = fileChooser.getSelectedFile();
+                try 
+                {
+                    BufferedImage image = ImageIO.read(file);
+                    ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                    this.lblProfil.setIcon(icon);
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Erreur lors du chargement de l'image", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+
+    public void setProfile(String nom, String prenom)
+    {
+        this.txtNom.setText(nom);
+        this.txtNom.setEnabled(false);
+        this.txtPrenom.setText(prenom);
+        this.txtPrenom.setEnabled(false);
     }
 }

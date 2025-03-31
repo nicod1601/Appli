@@ -23,7 +23,7 @@ public class FrameID extends JFrame
 
         this.ctrl = ctrl;
         this.frameConnexion = new FrameConnexion(this);
-        this.frameAppli = new FrameAppli(this);
+        this.frameAppli = new FrameAppli(this, this.ctrl);
 
 
         /*---------------------------*/
@@ -53,5 +53,10 @@ public class FrameID extends JFrame
     public void frameAppli()
     {
         this.frameAppli.setVisible(true);
+    }
+
+    public void setProfile(String nom, String prenom)
+    {
+        this.frameAppli.setProfile(nom, prenom);
     }
 }

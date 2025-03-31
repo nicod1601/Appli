@@ -14,6 +14,9 @@ public class Controleur
         this.ihm    = new FrameID(this);
     }
 
+    public String getNom()   {return this.metier.getNom();}
+    public String getPrenom(){return this.metier.getNom();}
+
     public void setIdentification(int id, String nom, String prenom)
     {
         this.metier = Joueur.creerJoueur(nom, prenom, id);

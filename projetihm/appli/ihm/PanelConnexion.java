@@ -6,7 +6,6 @@ import javax.swing.*;
 
 public class PanelConnexion extends JPanel implements ActionListener, MouseListener
 {
-    
     private JTextField txtNom;
     private JTextField txtPrenom;
     private JLabel     lblMessage;
@@ -71,6 +70,9 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
         this.btnConnexion.addMouseListener(this);
         this.btnCreer.addMouseListener(this);
 
+        this.txtNom.addActionListener(this);
+        this.txtPrenom.addActionListener(this);
+
     }
 
     public void actionPerformed(ActionEvent e)
@@ -88,6 +90,8 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
                 if(this.frame.connecter(this.txtNom.getText(), this.txtPrenom.getText()))
                 {
                     System.out.println("Connexion effectuée");
+                    this.frame.setProfile(this.txtNom.getText(), this.txtPrenom.getText());
+                    System.out.println(this.txtNom.getText() + " " + this.txtPrenom.getText());
                     this.lblMessage.setText("");
                     this.txtNom.setText("");
                     this.txtPrenom.setText("");

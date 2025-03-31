@@ -47,5 +47,10 @@ public class FrameConnexion extends JFrame
     {
         this.frameID.frameAppli();
     }
+
+    public void setProfile(String nom, String prenom)
+    {
+        this.frameID.setProfile(nom, prenom);
+    }
   
 }

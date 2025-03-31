@@ -3,6 +3,8 @@ package appli.ihm;
 import java.awt.*;
 import javax.swing.*;
 
+import appli.Controleur;
+
 public class FrameAppli extends JFrame
 {
     private PanelAccueil    panelAccueil;
@@ -11,8 +13,9 @@ public class FrameAppli extends JFrame
     private PanelOptionParametre panelOptionParametre;
 
     private FrameID frameID;
+    private Controleur ctrl;
 
-    public FrameAppli(FrameID frameID)
+    public FrameAppli(FrameID frameID, Controleur ctrl)
     {
         this.setTitle("Appli");
         this.setSize(500, 500);
@@ -21,12 +24,13 @@ public class FrameAppli extends JFrame
         this.setLocationRelativeTo(null);
 
         this.frameID = frameID;
+        this.ctrl = ctrl;
         /*--------------------------*/
         /* Création des composants  */
         /*--------------------------*/
         this.panelAccueil = new PanelAccueil();
         this.panelParametre = new PanelParametre(this.frameID, this);
-        this.panelOptionParametre = new PanelOptionParametre(this);
+        this.panelOptionParametre = new PanelOptionParametre(this, this.ctrl);
 
 
         /*---------------------------*/
@@ -68,5 +72,10 @@ public class FrameAppli extends JFrame
     public void setEcritureBouton(Color c)
     {
         this.panelParametre.setEcritureBouton(c);
+    }
+
+    public void setProfile(String nom, String prenom)
+    {
+        this.panelOptionParametre.setProfile(nom, prenom);
     }
 }
