@@ -32,9 +32,9 @@ public class FrameConnexion extends JFrame
         this.setVisible(false);
     }
 
-    public boolean  connecter(String pseudo,String mdp)
+    public boolean  connecter(String nom, String prenom)
     {
-        return this.frameID.connecter(pseudo, mdp);
+        return this.frameID.connecter(nom, prenom);
     }
 
     public void creerCompte()
@@ -48,9 +48,9 @@ public class FrameConnexion extends JFrame
         this.frameID.frameAppli();
     }
 
-    public void setInformation(String pseudo, String mdp)
+    public void setProfile(String nom, String prenom)
     {
-        this.frameID.setInformation(pseudo, mdp);
+        this.frameID.setProfile(nom, prenom);
     }
   
 }

@@ -1,14 +1,15 @@
 package appli.ihm;
 
-import appli.Controleur;
-import appli.metier.Fond;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import appli.Controleur;
+import appli.metier.Fond;
 
 public class PanelOptionParametre extends JPanel implements ActionListener, ItemListener
 {
@@ -251,15 +252,5 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         this.txtNom.setEnabled(false);
         this.txtPrenom.setText(prenom);
         this.txtPrenom.setEnabled(false);
-    }
-
-    public void setInformation(String pseudo, String mdp)
-    {
-        this.txtNom.setText(pseudo);
-        this.txtNom.setForeground(Color.BLACK);
-        this.txtNom.setEnabled(false);
-        this.txtPrenom.setText(mdp);
-        this.txtPrenom.setEnabled(false);
-        this.txtPrenom.setForeground(Color.BLACK);
     }
 }

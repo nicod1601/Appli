@@ -13,7 +13,7 @@ public class FrameID extends JFrame
     public FrameID(Controleur ctrl)
     {
         this.setTitle("Page Identification");
-        this.setSize(500, 200);
+        this.setSize(500, 150);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         /*--------------------------*/
@@ -35,14 +35,14 @@ public class FrameID extends JFrame
         this.setVisible(true);
     }
 
-    public void setIdentification(int id, String nom, String prenom, String mdp, String pseudo)
+    public void setIdentification(int id, String nom, String prenom)
     {
-        this.ctrl.setIdentification(id, nom, prenom, mdp, pseudo);
+        this.ctrl.setIdentification(id, nom, prenom);
     }
 
-    public boolean connecter(String pseudo, String mdp)
+    public boolean connecter(String nom, String prenom)
     {
-        return this.ctrl.connecter(pseudo, mdp);
+        return this.ctrl.connecter(nom, prenom);
     }
 
     public void frameConnexion()
@@ -55,8 +55,8 @@ public class FrameID extends JFrame
         this.frameAppli.setVisible(true);
     }
 
-    public void setInformation(String pseudo, String mdp)
+    public void setProfile(String nom, String prenom)
     {
-        this.frameAppli.setInformation(pseudo, mdp);
+        this.frameAppli.setProfile(nom, prenom);
     }
 }

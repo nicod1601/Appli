@@ -9,14 +9,7 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
 {
     private JTextField txtNom;
     private JTextField txtPrenom;
-    private JTextField txtPseudo;
-    private JPasswordField txtMDP;
     private int numID;
-
-    JPanel panelNom;
-    JPanel panelPrenom;
-    JPanel panelPseudo;
-    JPanel panelMDP;
 
     JPanel panelSexe;
     private JRadioButton homme;
@@ -35,7 +28,7 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
 
     public PanelID(FrameID frame)
     {
-        this.setLayout(new GridLayout(6,1));
+        this.setLayout(new GridLayout(4,1));
         this.setBackground(new Color(30, 30, 30));
 
         this.frame = frame;
@@ -44,27 +37,19 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         /*--------------------------*/
         JLabel lblNom    = new JLabel("nom :"    , JLabel.RIGHT);
         JLabel lblPrenom = new JLabel("prénom :" , JLabel.RIGHT);
-        JLabel lblPseudo = new JLabel("pseudo :"    , JLabel.RIGHT);
         JLabel lblSexe   = new JLabel("sexe :"   , JLabel.RIGHT);
-        JLabel lblMDP    = new JLabel("mot de passe :" , JLabel.RIGHT);
 
         this.styleLabel(lblNom);
         this.styleLabel(lblPrenom);
         this.styleLabel(lblSexe);
-        this.styleLabel(lblMDP);
-        this.styleLabel(lblPseudo);
 
         this.txtNom    = new JTextField(10);
         this.txtPrenom = new JTextField(10);
-        this.txtPseudo = new JTextField(10);
-        this.txtMDP    = new JPasswordField(10);
 
         this.styleTextField(txtNom);
         this.styleTextField(txtPrenom);
-        this.styleTextField(txtPseudo);
-        this.styleTextField(txtMDP);
 
-        this.panelSexe = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        this.panelSexe = new JPanel(new FlowLayout(FlowLayout.CENTER));
         this.panelSexe.setBackground(new Color(40, 40, 40));
         this.homme     = new JRadioButton("homme");
         this.femme     = new JRadioButton("femme");
@@ -86,31 +71,15 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         this.styleButton(btnValider);
         this.styleButton(btnQuitter);
 
-        panelNom = new JPanel(new GridLayout());
-        panelNom.setBackground(new Color(40, 40, 40));
-        panelPrenom = new JPanel(new GridLayout());
-        panelPrenom.setBackground(new Color(40, 40, 40));
-        panelPseudo = new JPanel(new GridLayout());
-        panelPseudo.setBackground(new Color(40, 40, 40));
-        panelMDP = new JPanel(new GridLayout());
-        panelMDP.setBackground(new Color(40, 40, 40));
-
 
 
         /*---------------------------*/
         /*   Position des composants */
         /*---------------------------*/
-        panelNom.add(lblNom);
-        panelNom.add(txtNom);
-
-        panelPrenom.add(lblPrenom);
-        panelPrenom.add(txtPrenom);
-
-        panelPseudo.add(lblPseudo);
-        panelPseudo.add(txtPseudo);
-
-        panelMDP.add(lblMDP);
-        panelMDP.add(txtMDP);
+        panelBouton.add(btnQuitter);
+        panelBouton.add(btnValider);
+        panelBouton.add(btnConnexion);
+        
 
         this.groupe.add(homme);
         this.groupe.add(femme);
@@ -120,15 +89,13 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         panelSexe.add(femme);
         panelSexe.add(autre);
 
-        panelBouton.add(btnQuitter);
-        panelBouton.add(btnValider);
-        panelBouton.add(btnConnexion);
-        
-        this.add(panelNom);
-        this.add(panelPrenom);
-        this.add(panelPseudo);
-        this.add(panelMDP);
+        this.add(lblNom);
+        this.add(txtNom);
+        this.add(lblPrenom);
+        this.add(txtPrenom);
+        this.add(lblSexe);
         this.add(panelSexe);
+        this.add(new JLabel());
         this.add(panelBouton);
 
 
@@ -165,16 +132,10 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
                 {
                     if(e.getSource() == this.btnValider)
                     {
-                        char[] passwordChars = this.txtMDP.getPassword();
-                        String password = new String(passwordChars);
-                        
-
                         this.numID = (int)(Math.random() * 999999);
                         System.out.println("ID : " + this.numID);
                         System.out.println("Nom : " + this.txtNom.getText());
                         System.out.println("Prénom : " + this.txtPrenom.getText());
-                        System.out.println("Pseudo : " + this.txtPseudo.getText());
-                        System.out.println("MDP : " + password);
         
                         if(this.groupe.getSelection() == this.homme)
                         {
@@ -192,7 +153,7 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
                             }
                         }
         
-                        this.frame.setIdentification(this.numID, this.txtNom.getText(), this.txtPrenom.getText(),password, this.txtPseudo.getText());
+                        this.frame.setIdentification(this.numID, this.txtNom.getText(), this.txtPrenom.getText());
                     }
                     
                 }

@@ -1,8 +1,9 @@
 package appli.ihm;
 
-import appli.Controleur;
 import java.awt.*;
 import javax.swing.*;
+
+import appli.Controleur;
 
 public class FrameAppli extends JFrame
 {
@@ -16,7 +17,7 @@ public class FrameAppli extends JFrame
 
     public FrameAppli(FrameID frameID, Controleur ctrl)
     {
-        this.setTitle("Super Earth");
+        this.setTitle("Appli");
         this.setSize(500, 500);
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +74,8 @@ public class FrameAppli extends JFrame
         this.panelParametre.setEcritureBouton(c);
     }
 
-    public void setInformation(String pseudo, String mdp)
+    public void setProfile(String nom, String prenom)
     {
-        this.panelOptionParametre.setInformation(pseudo, mdp);
+        this.panelOptionParametre.setProfile(nom, prenom);
     }
 }

@@ -14,14 +14,17 @@ public class Controleur
         this.ihm    = new FrameID(this);
     }
 
-    public void setIdentification(int id, String nom, String prenom, String mdp, String pseudo)
+    public String getNom()   {return this.metier.getNom();}
+    public String getPrenom(){return this.metier.getNom();}
+
+    public void setIdentification(int id, String nom, String prenom)
     {
-        this.metier = Joueur.creerJoueur(nom, prenom, id, mdp, pseudo);
+        this.metier = Joueur.creerJoueur(nom, prenom, id);
     }
 
-    public boolean connecter(String pseudo, String mdp)
+    public boolean connecter(String nom, String prenom)
     {
-        return this.metier.existe(pseudo, mdp);
+        return this.metier.existe(nom, prenom);
     }
 
     public static void main(String[] args)
