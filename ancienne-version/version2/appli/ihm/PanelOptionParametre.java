@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class PanelOptionParametre extends JPanel implements ActionListener, ItemListener, MouseListener
+public class PanelOptionParametre extends JPanel implements ActionListener, ItemListener
 {
     private JTabbedPane tabbedPane;
     private JPanel panelChangerFond;
@@ -22,11 +22,8 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
     /* Partie Compte */
     private JPanel panelCompte;
     private JLabel lblProfil;
-
-    JPanel panelNom;
     private JTextField txtNom;
-
-    private JTextField txtMDP;
+    private JTextField txtPrenom;
 
     private JPanel panelBoutonCompte;
     private JButton btnImporter;
@@ -51,37 +48,29 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         /* Création des composants  */
         /*--------------------------*/
         this.frame = frame;
-        this.ctrl  = ctrl;
+        this.ctrl = ctrl;
 
-        this.tabbedPane       = new JTabbedPane();
-        this.panelCompte      = new JPanel();
+        this.tabbedPane = new JTabbedPane();
+        this.panelCompte = new JPanel();
         this.panelChangerFond = new JPanel();
-        this.panelSecurite    = new JPanel();
+        this.panelSecurite = new JPanel();
 
-        this.btnQuitter = new JButton("Fermer les Paramètres");
+        this.btnQuitter = new JButton("Quitter");
 
         /* Panel Compte */
-        JLabel lblTitreProfile = new JLabel("Nom de Profil ");
-        JLabel lblTitreMDP     = new JLabel("Mot de Passe ");
-
-
-        this.panelCompte.setLayout(new GridLayout(2, 2, 5, 5));
+        this.panelCompte.setLayout(new GridLayout(2, 3, 5, 5));
         this.lblProfil = new JLabel(" ");
         this.txtNom = new JTextField(20);
-        this.txtMDP = new JTextField(20);
-
-        panelNom = new JPanel();
-        panelNom.add(lblTitreProfile);panelNom.add(this.txtNom);
-        panelNom.add(lblTitreMDP); panelNom.add(this.txtMDP);
-        
+        this.txtPrenom = new JTextField(20);
 
         this.panelBoutonCompte = new JPanel();
         this.btnImporter = new JButton("Importer");
         this.panelBoutonCompte.add(this.btnImporter);
 
         this.panelCompte.add(this.lblProfil);
-        this.panelCompte.add(panelNom);
+        this.panelCompte.add(this.txtNom);
         this.panelCompte.add(this.panelBoutonCompte);
+        this.panelCompte.add(this.txtPrenom);
 
         /* Panel Fond */
         this.fond = new Fond();
@@ -123,19 +112,6 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
             }
         });
 
-        this.styleLabel(lblTitreMDP);
-        this.styleLabel(lblTitreProfile);
-        this.styleLabel (this.lblProfil );
-        this.styleButton(this.btnQuitter);
-        this.stylePanel(panelBoutonCompte);
-        this.stylePanel(panelChangerFond);
-        this.stylePanel(panelCompte);
-        this.stylePanel(panelNom);
-        this.stylePanel(panelOptionFond);
-        this.stylePanel(panelSecurite);
-        this.styleRadioButton(this.tabRadio[0]);
-        this.styleRadioButton(this.tabRadio[1]);
-        this.styleRadioButton(this.tabRadio[2]);
         
 
         /* Ajout des onglets */
@@ -170,20 +146,13 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
 
         this.btnImporter.addActionListener(this);
         this.txtNom.addActionListener(this);
-        this.txtMDP.addActionListener(this);
+        this.txtPrenom.addActionListener(this);
 
         //ItemListener
         for(int cpt=0; cpt<this.tabRadio.length; cpt++)
         {
             this.tabRadio[cpt].addItemListener(this);
         }
-
-        // MouseListener
-        //---------------
-        this.btnImporter.addMouseListener(this);
-        this.btnQuitter.addMouseListener(this);
-        this.txtNom.addMouseListener(this);
-        this.txtMDP.addMouseListener(this);
 
     }
 
@@ -276,50 +245,12 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         }
     }
 
-    public void mouseClicked(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e)
-    {
-        if(e.getSource() == this.btnImporter)
-        {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        }
-
-        if(e.getSource() == this.btnQuitter)
-        {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        }
-
-        if(e.getSource() == this.txtNom || e.getSource() == this.txtMDP)
-        {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-        }
-    }
-    public void mouseExited(MouseEvent e)
-    {
-        if(e.getSource() == this.btnImporter)
-        {
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-
-        if(e.getSource() == this.btnQuitter)
-        {
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-
-        if(e.getSource() == this.txtNom || e.getSource() == this.txtMDP)
-        {
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-    }
-
     public void setProfile(String nom, String prenom)
     {
         this.txtNom.setText(nom);
         this.txtNom.setEnabled(false);
-        this.txtMDP.setText(prenom);
-        this.txtMDP.setEnabled(false);
+        this.txtPrenom.setText(prenom);
+        this.txtPrenom.setEnabled(false);
     }
 
     public void setInformation(String pseudo, String mdp)
@@ -327,47 +258,8 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         this.txtNom.setText(pseudo);
         this.txtNom.setForeground(Color.BLACK);
         this.txtNom.setEnabled(false);
-        this.txtMDP.setText(mdp);
-        this.txtMDP.setEnabled(false);
-        this.txtMDP.setForeground(Color.BLACK);
-    }
-
-    private void styleLabel(JLabel label) 
-    {
-        label.setForeground(Color.YELLOW); // Jaune militaire
-        label.setFont(new Font("Arial", Font.BOLD, 14));
-    }
-
-    private void styleButton(JButton button)
-    {
-        button.setBackground(new Color(70, 70, 70));
-        button.setForeground(Color.YELLOW);
-        button.setFont(new Font("Arial", Font.BOLD, 14));
-        button.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
-        button.setFocusPainted(false);
-    }
-
-    private void styleRadioButton(JRadioButton radio)
-    {
-        radio.setBackground(new Color(50, 50, 50));
-        radio.setForeground(Color.YELLOW);
-        radio.setFocusPainted(false);
-        radio.setFont(new Font("Arial", Font.BOLD, 12));
-        radio.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
-        radio.setOpaque(true);
-    }
-
-    private void styleTextField(JTextField field)
-    {
-        field.setBackground(new Color(50, 50, 50));
-        field.setForeground(Color.YELLOW);
-        field.setFont(new Font("Arial", Font.BOLD, 12));
-        field.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
-        //field.setFocusPainted(false);
-    }
-
-    private void stylePanel(JPanel panel)
-    {
-        panel.setBackground(new Color(50, 50, 50));
+        this.txtPrenom.setText(mdp);
+        this.txtPrenom.setEnabled(false);
+        this.txtPrenom.setForeground(Color.BLACK);
     }
 }

@@ -8,11 +8,8 @@ public class FrameAppli extends JFrame
 {
     private PanelAccueil    panelAccueil;
     private PanelParametre panelParametre;
+    //private PanelMenu panelMenu;
     private PanelOptionParametre panelOptionParametre;
-
-    // Panel page 
-    //---------------
-    private PanelStrategie panelStrategie;
 
     private FrameID frameID;
     private Controleur ctrl;
@@ -30,11 +27,9 @@ public class FrameAppli extends JFrame
         /*--------------------------*/
         /* Création des composants  */
         /*--------------------------*/
-        this.panelAccueil = new PanelAccueil(this);
+        this.panelAccueil = new PanelAccueil();
         this.panelParametre = new PanelParametre(this.frameID, this);
         this.panelOptionParametre = new PanelOptionParametre(this, this.ctrl);
-
-        this.panelStrategie = new PanelStrategie(this);
 
 
         /*---------------------------*/
@@ -52,27 +47,9 @@ public class FrameAppli extends JFrame
         // Si le panel d'options est visible, on le remplace par le panel d'accueil
         if (t) {
             this.remove(this.panelAccueil);
-            this.remove(this.panelStrategie);
             this.add(this.panelOptionParametre, BorderLayout.CENTER);
         } else {
             this.remove(this.panelOptionParametre);
-            this.add(this.panelAccueil, BorderLayout.CENTER);
-        }
-
-        // Mettre à jour l'interface pour appliquer le changement
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void panelStrategie(boolean t)
-    {
-        // Si le panel d'options est visible, on le remplace par le panel d'accueil
-        if (t) {
-            this.remove(this.panelAccueil);
-            this.remove(this.panelOptionParametre);
-            this.add(this.panelStrategie, BorderLayout.CENTER);
-        } else {
-            this.remove(this.panelStrategie);
             this.add(this.panelAccueil, BorderLayout.CENTER);
         }
 

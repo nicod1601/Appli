@@ -90,16 +90,14 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
                 if(this.frame.connecter(this.txtPseudo.getText(), mdpString))
                 {
                     System.out.println("Connexion effectuée");
-                    this.frame.setInformation(this.txtPseudo.getText(), mdpString);
-                    System.out.println("pseudo : " + this.txtPseudo.getText() + " mdp : " + mdpString);
-
                     this.lblMessage.setText("");
                     this.txtPseudo.setText("");
                     this.txtMDP.setText("");
                     this.frame.frameAppli();
                     this.frame.setVisible(false);
 
-                    
+                    this.frame.setInformation(this.txtPseudo.getText(), mdpString);
+                    System.out.println("pseudo : " + this.txtPseudo.getText() + " mdp : " + mdpString);
                 }
                 else
                 {

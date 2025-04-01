@@ -11,13 +11,10 @@ public class PanelAccueil extends JPanel implements ActionListener, MouseListene
     private String[] tabImages;
     private String[] tabNom;
 
-    private FrameAppli frame;
-
-    public PanelAccueil(FrameAppli frame) {
+    public PanelAccueil() {
         this.setLayout(new GridLayout(3, 3, 2, 2));
         this.setBackground(new Color(30, 30, 30));
 
-        this.frame = frame;
         /*--------------------------*/
         /* Création des composants  */
         /*--------------------------*/
@@ -68,11 +65,6 @@ public class PanelAccueil extends JPanel implements ActionListener, MouseListene
             if (e.getSource() == this.tabButton[cpt])
             {
                 System.out.println("Bouton " + tabNom[cpt] + " appuyé");
-
-                if(this.tabNom[cpt].equals("Stratagème"))
-                {
-                    this.frame.panelStrategie(true);
-                }
             }
         }
     }
