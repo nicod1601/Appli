@@ -89,11 +89,13 @@ public class FrameAppli extends JFrame
     public void setFondBouton(Color c)
     {
        this.panelParametre.setFondBouton(c);
+       this.frameID.setFondBouton(c);
     }
 
     public void setEcritureBouton(Color c)
     {
         this.panelParametre.setEcritureBouton(c);
+        this.frameID.setEcritureBouton(c);
     }
 
     public void setInformation(String pseudo, String mdp)

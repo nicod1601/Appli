@@ -167,4 +167,16 @@ public class PanelConnexion extends JPanel implements ActionListener, MouseListe
         button.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
         button.setFocusPainted(false);
     }
+
+    public void setEcritureBouton(Color c)
+    {
+        this.btnConnexion.setForeground(c);
+        this.btnCreer.setForeground(c);
+    }
+
+    public void setFondBouton(Color c)
+    {
+       this.btnConnexion.setBorder(BorderFactory.createLineBorder(c, 2));
+       this.btnCreer.setBorder(BorderFactory.createLineBorder(c, 2));
+    }
 }

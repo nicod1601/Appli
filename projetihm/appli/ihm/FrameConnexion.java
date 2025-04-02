@@ -1,6 +1,7 @@
 package appli.ihm;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FrameConnexion extends JFrame
 {
@@ -51,6 +52,16 @@ public class FrameConnexion extends JFrame
     public void setInformation(String pseudo, String mdp)
     {
         this.frameID.setInformation(pseudo, mdp);
+    }
+
+    public void setEcritureBouton(Color c)
+    {
+        this.panelConnexion.setEcritureBouton(c);
+    }
+
+    public void setFondBouton(Color c)
+    {
+       this.panelConnexion.setFondBouton(c);
     }
   
 }

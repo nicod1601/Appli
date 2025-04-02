@@ -23,17 +23,18 @@ public class PanelStrategie extends JPanel implements ActionListener, MouseListe
         /* Création des composants  */
         /*--------------------------*/
         String[][] strategies = {
-            /*{"orbital_gatling.jpg", "Orbital Gatling", "Une mitrailleuse orbitale offrant un tir soutenu sur une zone ciblée."},
-            {"eagle_airstrike.jpg", "Eagle Airstrike", "Un bombardement aérien rapide et efficace contre les ennemis au sol."},
-            {"supply_pack.jpg", "Supply Pack", "Fournit des munitions et du matériel supplémentaire aux Helldivers."},
-            {"guard_dog.jpg", "Guard Dog", "Un drone de soutien qui tire automatiquement sur les ennemis à proximité."},
-            {"tesla_tower.jpg", "Tesla Tower", "Une tourelle stationnaire qui électrocute les ennemis dans un rayon proche."},
-            {"reinforce.jpg", "Reinforce", "Permet de rappeler un coéquipier tombé au combat."},
-            {"orbital_laser.jpg", "Orbital Laser", "Un puissant laser orbital qui inflige d'importants dégâts sur une large zone."},
-            {"autocannon.jpg", "Autocannon", "Une arme lourde infligeant des dégâts massifs aux ennemis blindés."},
-            {"shield_generator.jpg", "Shield Generator", "Crée un champ de force temporaire protégeant des attaques ennemies."},
-            {"Orbital_Napalm_Barrage.png", "Orbital Napalm Barrage", "Un bombardement aérien rapide et efficace contre les ennemis au sol."}
-            {"./img/competence.png", "Orbital Napalm Barrage", "Un bombardement aérien rapide et efficace contre les ennemis au sol."}*/
+            {"./img/Strateges/Orbital_Napalm_Barrage.png", "Orbital Napalm Barrage", "Un bombardement orbital qui enflamme la zone ciblée."},
+            {"./img/Strateges/Bombe_sac.png"             , "Sac Bomb", "Une charge explosive puissante à usage unique."},
+            {"./img/Strateges/fusil-gaz.png"             , "Toxic Gas Rifle", "Un fusil qui tire des munitions toxiques infligeant des dégâts sur la durée."},
+            {"./img/Strateges/stratageme.png"            , "Stratagem", "Un appel de soutien tactique utilisé pour divers effets sur le champ de bataille."},
+            {"./img/Strateges/bouclier.png"              , "Shield Generator Pack", "Fournit un bouclier temporaire absorbant les dégâts."},
+            {"./img/Strateges/mine-gaz.png"              , "Gas Mine", "Déploie des mines qui libèrent un gaz toxique à l'activation."},
+            {"./img/Strateges/mine-chare.png"            , "Anti-Tank Mine", "Une mine puissante conçue pour détruire les véhicules ennemis."},
+            {"./img/Strateges/voiture.png"               , "APC (Armored Personnel Carrier)", "Un véhicule blindé offrant protection et puissance de feu."},
+            {"./img/Strateges/cannon-lazer.png"          , "Laser Cannon", "Une arme lourde qui tire des faisceaux laser destructeurs."},
+            {"./img/Strateges/lance-rocket.png"          , "Rocket Launcher", "Un lance-roquettes puissant contre les véhicules et les grandes cibles."},
+            {"./img/Strateges/lance-rocket-multiple.png" , "Multiple Rocket Launcher", "Tire plusieurs roquettes en succession rapide."},
+            {"./img/Strateges/cannon-laser.png"          , "Laser Cannon", "Une arme à énergie infligeant des dégâts élevés aux ennemis blindés."}
         };
         
         int rows = strategies.length;
@@ -41,12 +42,11 @@ public class PanelStrategie extends JPanel implements ActionListener, MouseListe
         
         for (int i = 0; i < rows; i++) {
             // Colonne 1 : Image + Nom
-            /*ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(this.tabLabel[i][0].getText()));
+            ImageIcon icon = new ImageIcon(getClass().getResource(strategies[i][0]));
             Image img = icon.getImage();
             Image newimg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
-            icon = new ImageIcon(newimg);*/
-            //System.out.println("strategies[i][0] : " + strategies[i][0]);
-            this.tabLabel[i][0] = new JLabel(strategies[i][1], null, SwingConstants.LEFT);
+            icon = new ImageIcon(newimg);
+            this.tabLabel[i][0] = new JLabel(strategies[i][1], icon, SwingConstants.LEFT);
             this.tabLabel[i][0].setForeground(Color.WHITE);
             this.tabLabel[i][0].setFont(new Font("Arial", Font.BOLD, 14));
             this.tabLabel[i][0].setOpaque(true);

@@ -1,6 +1,7 @@
 package appli.ihm;
 import appli.Controleur;
 import javax.swing.*;
+import java.awt.*;
 
 public class FrameID extends JFrame
 {
@@ -53,10 +54,23 @@ public class FrameID extends JFrame
     public void frameAppli()
     {
         this.frameAppli.setVisible(true);
+        this.setVisible(false);
     }
 
     public void setInformation(String pseudo, String mdp)
     {
         this.frameAppli.setInformation(pseudo, mdp);
+    }
+
+    public void setEcritureBouton(Color c)
+    {
+        this.panelID.setEcritureBouton(c);
+        this.frameConnexion.setEcritureBouton(c);
+    }
+
+    public void setFondBouton(Color c)
+    {
+       this.panelID.setFondBouton(c);
+       this.frameConnexion.setFondBouton(c);
     }
 }

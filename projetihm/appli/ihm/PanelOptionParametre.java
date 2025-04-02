@@ -266,7 +266,7 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
                 try 
                 {
                     BufferedImage image = ImageIO.read(file);
-                    ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                    ImageIcon icon = new ImageIcon(image.getScaledInstance(500, 500, Image.SCALE_SMOOTH));
                     this.lblProfil.setIcon(icon);
 
                 } catch (IOException ex) {
@@ -363,7 +363,6 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
         field.setForeground(Color.YELLOW);
         field.setFont(new Font("Arial", Font.BOLD, 12));
         field.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
-        //field.setFocusPainted(false);
     }
 
     private void stylePanel(JPanel panel)

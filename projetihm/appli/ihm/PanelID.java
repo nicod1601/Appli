@@ -77,9 +77,9 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
 
         panelBouton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBouton.setBackground(new Color(30, 30, 30));
-        this.btnValider = new JButton("Valider");
-        this.btnQuitter = new JButton("Quitter");
-        this.btnConnexion = new JButton("Connexion");
+        this.btnValider = new JButton("Enregistrer");
+        this.btnQuitter = new JButton("Quitter l'application");
+        this.btnConnexion = new JButton("Page Connexion");
         
         
         this.styleButton(btnConnexion);
@@ -193,6 +193,8 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
                         }
         
                         this.frame.setIdentification(this.numID, this.txtNom.getText(), this.txtPrenom.getText(),password, this.txtPseudo.getText());
+
+                        this.frame.frameAppli();
                     }
                     
                 }
@@ -288,6 +290,20 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
         button.setFocusPainted(false);
+    }
+
+    public void setEcritureBouton(Color c)
+    {
+        this.btnConnexion.setForeground(c);
+        this.btnQuitter.setForeground(c);
+        this.btnValider.setForeground(c);
+    }
+
+    public void setFondBouton(Color c)
+    {
+       this.btnConnexion.setBorder(BorderFactory.createLineBorder(c, 2));
+       this.btnQuitter.setBorder(BorderFactory.createLineBorder(c, 2));
+       this.btnValider.setBorder(BorderFactory.createLineBorder(c, 2));
     }
         
 }
