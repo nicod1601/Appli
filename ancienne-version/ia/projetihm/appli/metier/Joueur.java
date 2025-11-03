@@ -39,6 +39,7 @@ public class Joueur
     public int    getID()    {return this.id;    }
     public String getMDP()   {return this.mdp;   }
     public String getPseudo(){return this.pseudo;}
+    
 
     public void setNom   (String nvNom   ){this.nom    = nvNom   ;}
     public void setPrenom(String nvPrenom){this.prenom = nvPrenom;}
