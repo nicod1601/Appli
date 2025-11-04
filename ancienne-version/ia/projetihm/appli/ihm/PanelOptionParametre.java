@@ -5,8 +5,7 @@ import appli.metier.Fond;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -39,6 +38,17 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
 
     private FrameAppli frame;
     private Controleur ctrl;
+
+    /* Partie Sécurité */
+    private JTextField txtNouveauPseudo;
+    private JPasswordField txtNouveauMDP;
+    private JPasswordField txtConfirmerMDP;
+    private JButton btnModifierPseudo;
+    private JButton btnModifierMDP;
+    private JLabel lblStatutModif;
+
+    //private JRadioButton[] tabRadio;
+    //private ButtonGroup groupe;
 
     public PanelOptionParametre(FrameAppli frame, Controleur ctrl)
     {
@@ -204,14 +214,125 @@ public class PanelOptionParametre extends JPanel implements ActionListener, Item
 
         /* ============= PANEL SÉCURITÉ ============= */
         this.panelSecurite = new JPanel();
-        this.panelSecurite.setLayout(new BorderLayout());
+        this.panelSecurite.setLayout(new BorderLayout(20, 20));
         this.panelSecurite.setBackground(new Color(40, 40, 40));
         this.panelSecurite.setBorder(new EmptyBorder(30, 30, 30, 30));
 
-        JLabel lblSecurite = new JLabel("Section Sécurité - À venir", JLabel.CENTER);
-        lblSecurite.setFont(new Font("Arial", Font.BOLD, 18));
-        lblSecurite.setForeground(Color.YELLOW);
-        this.panelSecurite.add(lblSecurite, BorderLayout.CENTER);
+        JPanel panelCentreSecurite = new JPanel();
+        panelCentreSecurite.setLayout(new BoxLayout(panelCentreSecurite, BoxLayout.Y_AXIS));
+        panelCentreSecurite.setBackground(new Color(40, 40, 40));
+
+        // Titre
+        JLabel lblTitreSecurite = new JLabel("MODIFIER MES IDENTIFIANTS");
+        lblTitreSecurite.setFont(new Font("Arial", Font.BOLD, 20));
+        lblTitreSecurite.setForeground(Color.YELLOW);
+        lblTitreSecurite.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelCentreSecurite.add(lblTitreSecurite);
+        panelCentreSecurite.add(Box.createVerticalStrut(30));
+
+        // Section Modifier le Pseudo
+        JPanel panelModifPseudo = new JPanel();
+        panelModifPseudo.setLayout(new BoxLayout(panelModifPseudo, BoxLayout.Y_AXIS));
+        panelModifPseudo.setBackground(new Color(45, 45, 45));
+        panelModifPseudo.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.YELLOW, 2),
+            new EmptyBorder(20, 20, 20, 20)
+        ));
+        panelModifPseudo.setMaximumSize(new Dimension(600, 150));
+
+        JLabel lblTitreModifPseudo = new JLabel("🔑 Modifier le pseudo");
+        lblTitreModifPseudo.setFont(new Font("Arial", Font.BOLD, 16));
+        lblTitreModifPseudo.setForeground(Color.YELLOW);
+        lblTitreModifPseudo.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel lblNouveauPseudo = new JLabel("Nouveau pseudo");
+        this.styleLabel(lblNouveauPseudo);
+        lblNouveauPseudo.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        this.txtNouveauPseudo = new JTextField(25);
+        this.styleTextField(this.txtNouveauPseudo);
+        this.txtNouveauPseudo.setMaximumSize(new Dimension(600, 35));
+        this.txtNouveauPseudo.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        this.btnModifierPseudo = new JButton("Valider le nouveau pseudo");
+        this.styleButton(this.btnModifierPseudo);
+        this.btnModifierPseudo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.btnModifierPseudo.setPreferredSize(new Dimension(220, 35));
+        this.btnModifierPseudo.setMaximumSize(new Dimension(220, 35));
+
+        panelModifPseudo.add(lblTitreModifPseudo);
+        panelModifPseudo.add(Box.createVerticalStrut(12));
+        panelModifPseudo.add(lblNouveauPseudo);
+        panelModifPseudo.add(Box.createVerticalStrut(8));
+        panelModifPseudo.add(this.txtNouveauPseudo);
+        panelModifPseudo.add(Box.createVerticalStrut(12));
+        panelModifPseudo.add(this.btnModifierPseudo);
+
+        panelCentreSecurite.add(panelModifPseudo);
+        panelCentreSecurite.add(Box.createVerticalStrut(25));
+
+        // Section Modifier le Mot de passe
+        JPanel panelModifMDP = new JPanel();
+        panelModifMDP.setLayout(new BoxLayout(panelModifMDP, BoxLayout.Y_AXIS));
+        panelModifMDP.setBackground(new Color(45, 45, 45));
+        panelModifMDP.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.YELLOW, 2),
+            new EmptyBorder(20, 20, 20, 20)
+        ));
+        panelModifMDP.setMaximumSize(new Dimension(600, 220));
+
+        JLabel lblTitreModifMDP = new JLabel("🔒 Modifier le mot de passe");
+        lblTitreModifMDP.setFont(new Font("Arial", Font.BOLD, 16));
+        lblTitreModifMDP.setForeground(Color.YELLOW);
+        lblTitreModifMDP.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel lblNouveauMDP = new JLabel("Nouveau mot de passe");
+        this.styleLabel(lblNouveauMDP);
+        lblNouveauMDP.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        this.txtNouveauMDP = new JPasswordField(25);
+        this.styleTextField(this.txtNouveauMDP);
+        this.txtNouveauMDP.setMaximumSize(new Dimension(600, 35));
+        this.txtNouveauMDP.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel lblConfirmerMDP = new JLabel("Confirmer le mot de passe");
+        this.styleLabel(lblConfirmerMDP);
+        lblConfirmerMDP.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        this.txtConfirmerMDP = new JPasswordField(25);
+        this.styleTextField(this.txtConfirmerMDP);
+        this.txtConfirmerMDP.setMaximumSize(new Dimension(600, 35));
+        this.txtConfirmerMDP.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        this.btnModifierMDP = new JButton("Valider le nouveau mot de passe");
+        this.styleButton(this.btnModifierMDP);
+        this.btnModifierMDP.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.btnModifierMDP.setPreferredSize(new Dimension(250, 35));
+        this.btnModifierMDP.setMaximumSize(new Dimension(250, 35));
+
+        panelModifMDP.add(lblTitreModifMDP);
+        panelModifMDP.add(Box.createVerticalStrut(12));
+        panelModifMDP.add(lblNouveauMDP);
+        panelModifMDP.add(Box.createVerticalStrut(8));
+        panelModifMDP.add(this.txtNouveauMDP);
+        panelModifMDP.add(Box.createVerticalStrut(12));
+        panelModifMDP.add(lblConfirmerMDP);
+        panelModifMDP.add(Box.createVerticalStrut(8));
+        panelModifMDP.add(this.txtConfirmerMDP);
+        panelModifMDP.add(Box.createVerticalStrut(12));
+        panelModifMDP.add(this.btnModifierMDP);
+
+        panelCentreSecurite.add(panelModifMDP);
+        panelCentreSecurite.add(Box.createVerticalStrut(20));
+
+        // Label de statut des modifications
+        this.lblStatutModif = new JLabel("", SwingConstants.CENTER);
+        this.lblStatutModif.setFont(new Font("Arial", Font.BOLD, 13));
+        this.lblStatutModif.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panelCentreSecurite.add(this.lblStatutModif);
+
+        this.panelSecurite.add(panelCentreSecurite, BorderLayout.CENTER);
 
         /* Ajout des onglets avec icônes */
         this.tabbedPane.addTab("👤 Compte", this.panelCompte);
