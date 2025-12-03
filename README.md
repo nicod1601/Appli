@@ -51,3 +51,8 @@ L’objectif est de fournir une application claire, intuitive et utile pour tous
 
 ## 📸 Aperçu de l’application
 
+<img width="703" height="599" alt="image" src="https://github.com/user-attachments/assets/b7f116ec-5f85-4ee5-b7cc-da82c19cbf62" />
+
+
+
+
