@@ -10,8 +10,6 @@ public class FrameAppli extends JFrame
     private PanelParametre panelParametre;
     private PanelOptionParametre panelOptionParametre;
 
-    // Panel page 
-    //---------------
     private PanelStrategie panelStrategie;
 
     private FrameID frameID;

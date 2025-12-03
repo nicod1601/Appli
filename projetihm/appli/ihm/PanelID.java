@@ -3,6 +3,7 @@ package appli.ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 
 public class PanelID extends JPanel implements ActionListener, MouseListener
@@ -29,24 +30,38 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
     private JButton btnQuitter;
     private JButton btnConnexion;
 
-
     private FrameID frame;
 
 
     public PanelID(FrameID frame)
     {
-        this.setLayout(new GridLayout(6,1));
+        this.setLayout(new BorderLayout(20, 20));
         this.setBackground(new Color(30, 30, 30));
+        this.setBorder(new EmptyBorder(30, 50, 30, 50));
 
         this.frame = frame;
+        
+        // Panel central pour le formulaire
+        JPanel panelCentral = new JPanel();
+        panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
+        panelCentral.setBackground(new Color(30, 30, 30));
+        
+        // Titre
+        JLabel titre = new JLabel("INSCRIPTION");
+        titre.setFont(new Font("Arial", Font.BOLD, 28));
+        titre.setForeground(Color.YELLOW);
+        titre.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelCentral.add(titre);
+        panelCentral.add(Box.createVerticalStrut(30));
+
         /*--------------------------*/
         /* Création des composants  */
         /*--------------------------*/
-        JLabel lblNom    = new JLabel("nom :"    , JLabel.RIGHT);
-        JLabel lblPrenom = new JLabel("prénom :" , JLabel.RIGHT);
-        JLabel lblPseudo = new JLabel("pseudo :"    , JLabel.RIGHT);
-        JLabel lblSexe   = new JLabel("sexe :"   , JLabel.RIGHT);
-        JLabel lblMDP    = new JLabel("mot de passe :" , JLabel.RIGHT);
+        JLabel lblNom    = new JLabel("Nom");
+        JLabel lblPrenom = new JLabel("Prénom");
+        JLabel lblPseudo = new JLabel("Pseudo");
+        JLabel lblSexe   = new JLabel("Sexe");
+        JLabel lblMDP    = new JLabel("Mot de passe");
 
         this.styleLabel(lblNom);
         this.styleLabel(lblPrenom);
@@ -54,63 +69,43 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         this.styleLabel(lblMDP);
         this.styleLabel(lblPseudo);
 
-        this.txtNom    = new JTextField(10);
-        this.txtPrenom = new JTextField(10);
-        this.txtPseudo = new JTextField(10);
-        this.txtMDP    = new JPasswordField(10);
+        this.txtNom    = new JTextField(20);
+        this.txtPrenom = new JTextField(20);
+        this.txtPseudo = new JTextField(20);
+        this.txtMDP    = new JPasswordField(20);
 
         this.styleTextField(txtNom);
         this.styleTextField(txtPrenom);
         this.styleTextField(txtPseudo);
         this.styleTextField(txtMDP);
 
-        this.panelSexe = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        this.panelSexe.setBackground(new Color(40, 40, 40));
-        this.homme     = new JRadioButton("homme");
-        this.femme     = new JRadioButton("femme");
-        this.autre     = new JRadioButton("autre");
+        // Panels pour chaque champ avec espacement vertical
+        panelNom = createFieldPanel(lblNom, txtNom);
+        panelPrenom = createFieldPanel(lblPrenom, txtPrenom);
+        panelPseudo = createFieldPanel(lblPseudo, txtPseudo);
+        panelMDP = createFieldPanel(lblMDP, txtMDP);
+
+        // Panel sexe avec style amélioré
+        this.panelSexe = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
+        this.panelSexe.setBackground(new Color(30, 30, 30));
+        this.panelSexe.setMaximumSize(new Dimension(600, 60));
+        
+        JPanel sexeContainer = new JPanel();
+        sexeContainer.setLayout(new BoxLayout(sexeContainer, BoxLayout.Y_AXIS));
+        sexeContainer.setBackground(new Color(30, 30, 30));
+        
+        lblSexe.setAlignmentX(Component.LEFT_ALIGNMENT);
+        sexeContainer.add(lblSexe);
+        sexeContainer.add(Box.createVerticalStrut(8));
+        
+        this.homme     = new JRadioButton("Homme");
+        this.femme     = new JRadioButton("Femme");
+        this.autre     = new JRadioButton("Autre");
         this.groupe    = new ButtonGroup();
 
         this.styleRadioButton(homme);
         this.styleRadioButton(femme);
         this.styleRadioButton(autre);
-
-        panelBouton = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panelBouton.setBackground(new Color(30, 30, 30));
-        this.btnValider = new JButton("Enregistrer");
-        this.btnQuitter = new JButton("Quitter l'application");
-        this.btnConnexion = new JButton("Page Connexion");
-        
-        
-        this.styleButton(btnConnexion);
-        this.styleButton(btnValider);
-        this.styleButton(btnQuitter);
-
-        panelNom = new JPanel(new GridLayout());
-        panelNom.setBackground(new Color(40, 40, 40));
-        panelPrenom = new JPanel(new GridLayout());
-        panelPrenom.setBackground(new Color(40, 40, 40));
-        panelPseudo = new JPanel(new GridLayout());
-        panelPseudo.setBackground(new Color(40, 40, 40));
-        panelMDP = new JPanel(new GridLayout());
-        panelMDP.setBackground(new Color(40, 40, 40));
-
-
-
-        /*---------------------------*/
-        /*   Position des composants */
-        /*---------------------------*/
-        panelNom.add(lblNom);
-        panelNom.add(txtNom);
-
-        panelPrenom.add(lblPrenom);
-        panelPrenom.add(txtPrenom);
-
-        panelPseudo.add(lblPseudo);
-        panelPseudo.add(txtPseudo);
-
-        panelMDP.add(lblMDP);
-        panelMDP.add(txtMDP);
 
         this.groupe.add(homme);
         this.groupe.add(femme);
@@ -119,18 +114,47 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         panelSexe.add(homme);
         panelSexe.add(femme);
         panelSexe.add(autre);
+        panelSexe.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        sexeContainer.add(panelSexe);
 
-        panelBouton.add(btnQuitter);
+        // Boutons avec style amélioré
+        panelBouton = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
+        panelBouton.setBackground(new Color(30, 30, 30));
+        panelBouton.setMaximumSize(new Dimension(800, 60));
+        
+        this.btnValider = new JButton("Enregistrer");
+        this.btnConnexion = new JButton("Page Connexion");
+        this.btnQuitter = new JButton("Quitter");
+        
+        this.styleButton(btnValider);
+        this.styleButton(btnConnexion);
+        this.styleButton(btnQuitter);
+        
+        btnValider.setPreferredSize(new Dimension(150, 40));
+        btnConnexion.setPreferredSize(new Dimension(150, 40));
+        btnQuitter.setPreferredSize(new Dimension(120, 40));
+
         panelBouton.add(btnValider);
         panelBouton.add(btnConnexion);
-        
-        this.add(panelNom);
-        this.add(panelPrenom);
-        this.add(panelPseudo);
-        this.add(panelMDP);
-        this.add(panelSexe);
-        this.add(panelBouton);
+        panelBouton.add(btnQuitter);
 
+        /*---------------------------*/
+        /*   Position des composants */
+        /*---------------------------*/
+        panelCentral.add(panelNom);
+        panelCentral.add(Box.createVerticalStrut(15));
+        panelCentral.add(panelPrenom);
+        panelCentral.add(Box.createVerticalStrut(15));
+        panelCentral.add(panelPseudo);
+        panelCentral.add(Box.createVerticalStrut(15));
+        panelCentral.add(panelMDP);
+        panelCentral.add(Box.createVerticalStrut(15));
+        panelCentral.add(sexeContainer);
+        panelCentral.add(Box.createVerticalStrut(30));
+        panelCentral.add(panelBouton);
+        
+        this.add(panelCentral, BorderLayout.CENTER);
 
         /*---------------------------*/
         /* Activation des composants */
@@ -142,8 +166,24 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         this.btnConnexion.addMouseListener(this);
         this.btnValider.addMouseListener(this);
         this.btnQuitter.addMouseListener(this);
+    }
 
-
+    private JPanel createFieldPanel(JLabel label, JTextField field)
+    {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(new Color(30, 30, 30));
+        panel.setMaximumSize(new Dimension(600, 70));
+        
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        field.setAlignmentX(Component.LEFT_ALIGNMENT);
+        field.setMaximumSize(new Dimension(600, 35));
+        
+        panel.add(label);
+        panel.add(Box.createVerticalStrut(8));
+        panel.add(field);
+        
+        return panel;
     }
 
     public void actionPerformed(ActionEvent e) 
@@ -168,7 +208,6 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
                         char[] passwordChars = this.txtMDP.getPassword();
                         String password = new String(passwordChars);
                         
-
                         this.numID = (int)(Math.random() * 999999);
                         System.out.println("ID : " + this.numID);
                         System.out.println("Nom : " + this.txtNom.getText());
@@ -176,64 +215,53 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
                         System.out.println("Pseudo : " + this.txtPseudo.getText());
                         System.out.println("MDP : " + password);
         
-                        if(this.groupe.getSelection() == this.homme)
+                        if(this.homme.isSelected())
                         {
                             System.out.println("Sexe : homme");
                         }
-                        else 
+                        else if(this.femme.isSelected())
                         {
-                            if(this.groupe.getSelection() == this.femme)
-                            {
-                                System.out.println("Sexe : femme");
-                            }
-                            else
-                            {
-                                System.out.println("Sexe : autre");
-                            }
+                            System.out.println("Sexe : femme");
+                        }
+                        else
+                        {
+                            System.out.println("Sexe : autre");
                         }
         
-                        this.frame.setIdentification(this.numID, this.txtNom.getText(), this.txtPrenom.getText(),password, this.txtPseudo.getText());
-
+                        this.frame.setIdentification(this.numID, this.txtNom.getText(), this.txtPrenom.getText(), password, this.txtPseudo.getText());
                         this.frame.frameAppli();
                     }
-                    
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs obligatoires", "Champs manquants", JOptionPane.WARNING_MESSAGE);
                 }
             }
         }
     }
 
-
-
-
     public void mouseClicked(MouseEvent e) {}
-
     public void mousePressed(MouseEvent e) {}
-
     public void mouseReleased(MouseEvent e) {}
-
 
     public void mouseEntered(MouseEvent e)
     {
         if(e.getComponent() == this.btnConnexion)
         {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            this.btnConnexion.setBackground(Color.GREEN);
+            this.btnConnexion.setBackground(new Color(0, 180, 0));
         }
 
         if(e.getComponent() == this.btnQuitter)
         {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            this.btnQuitter.setBackground(Color.RED);
+            this.btnQuitter.setBackground(new Color(200, 0, 0));
         }
 
         if(e.getComponent() == this.btnValider)
         {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            this.btnValider.setBackground(Color.GREEN);
+            this.btnValider.setBackground(new Color(0, 180, 0));
         }
     }
 
@@ -242,26 +270,25 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         if(e.getComponent() == this.btnConnexion)
         {
             this.setCursor(Cursor.getDefaultCursor());
-            this.btnConnexion.setBackground(new Color(30, 30, 30));
+            this.btnConnexion.setBackground(new Color(70, 70, 70));
         }
 
         if(e.getComponent() == this.btnQuitter)
         {
             this.setCursor(Cursor.getDefaultCursor());
-            this.btnQuitter.setBackground(new Color(30, 30, 30));
+            this.btnQuitter.setBackground(new Color(70, 70, 70));
         }
 
         if(e.getComponent() == this.btnValider)
         {
             this.setCursor(Cursor.getDefaultCursor());
-            this.btnValider.setBackground(new Color(30, 30, 30));
+            this.btnValider.setBackground(new Color(70, 70, 70));
         }
     }
 
-
     private void styleLabel(JLabel label) 
     {
-        label.setForeground(Color.YELLOW); // Jaune militaire
+        label.setForeground(Color.YELLOW);
         label.setFont(new Font("Arial", Font.BOLD, 14));
     }
 
@@ -270,7 +297,11 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         field.setBackground(new Color(50, 50, 50));
         field.setForeground(Color.WHITE);
         field.setCaretColor(Color.YELLOW);
-        field.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
+        field.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.YELLOW, 2),
+            BorderFactory.createEmptyBorder(5, 10, 5, 10)
+        ));
+        field.setFont(new Font("Arial", Font.PLAIN, 14));
     }
 
     private void styleRadioButton(JRadioButton radio)
@@ -278,8 +309,11 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         radio.setBackground(new Color(50, 50, 50));
         radio.setForeground(Color.YELLOW);
         radio.setFocusPainted(false);
-        radio.setFont(new Font("Arial", Font.BOLD, 12));
-        radio.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
+        radio.setFont(new Font("Arial", Font.BOLD, 13));
+        radio.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Color.YELLOW, 1),
+            BorderFactory.createEmptyBorder(5, 15, 5, 15)
+        ));
         radio.setOpaque(true);
     }
 
@@ -290,6 +324,7 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
         button.setFocusPainted(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     public void setEcritureBouton(Color c)
@@ -305,5 +340,4 @@ public class PanelID extends JPanel implements ActionListener, MouseListener
        this.btnQuitter.setBorder(BorderFactory.createLineBorder(c, 2));
        this.btnValider.setBorder(BorderFactory.createLineBorder(c, 2));
     }
-        
 }

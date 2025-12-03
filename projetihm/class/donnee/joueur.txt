@@ -1,24 +1,12 @@
-Nom : dd
-Prénom : nn
-ID : 499951
-MDP : 11
-Pseudo : ni
-
-Nom : delpech
-Prénom : nicolas
-ID : 416616
+Nom : Delpech
+Prénom : Nicolas
+ID : 863227
 MDP : nicomat1617
 Pseudo : nicod16
 
-Nom : foubert
-Prénom : jean
-ID : 297690
-MDP : 123
-Pseudo : jf
-
-Nom : nicolas
-Prénom : delpech
-ID : 169338
-MDP : 123
+Nom : Delpech
+Prénom : Nicolas
+ID : 258196
+MDP : 1234
 Pseudo : nicod1601
 
